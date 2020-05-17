@@ -3,7 +3,7 @@ SpringBoot 기반의 Restful한 API 개발을 연습하기 위한 프로젝트 �
 
 ### 프로젝트 의존성
 
-- Spring Web
+- Spring Boot
 
 - Spring HATEOAS
 
@@ -14,6 +14,10 @@ SpringBoot 기반의 Restful한 API 개발을 연습하기 위한 프로젝트 �
 - H2 Database
 
 - PostgreSQL
+
+- ModelMapper
+
+- Validator
 
 - Lombok
 
