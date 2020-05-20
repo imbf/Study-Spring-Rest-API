@@ -1,6 +1,7 @@
 package com.greenfrog.restapi.events;
 
 import com.greenfrog.restapi.common.ErrorsResource;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -81,6 +82,32 @@ public class EventController {
         EventResource eventResource = new EventResource(event);
         eventResource.add(new Link("/docs/index.html#resources-events-get").withRel("profile"));
         return ResponseEntity.ok(eventResource);
+    }
 
+    @PutMapping("{id}")
+    public ResponseEntity updateEvent(@PathVariable Integer id,
+                                      @RequestBody @Valid EventDTO eventDTO,
+                                      Errors errors) {
+        Optional<Event> savedEvent = this.eventRepository.findById(id);
+        if(savedEvent.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (errors.hasErrors()) {
+            return badRequest(errors);
+        }
+
+        this.eventValidator.validate(eventDTO, errors);
+        if(errors.hasErrors()) {
+            return badRequest(errors);
+        }
+        Event existingEvent = savedEvent.get();
+        this.modelMapper.map(eventDTO, existingEvent);
+        Event updatedEvent = this.eventRepository.save(existingEvent);
+
+        EventResource eventResource = new EventResource(updatedEvent);
+        eventResource.add(new Link("/docs/index.html#resources-event-update").withRel("profile"));
+
+        return ResponseEntity.ok(eventResource);
     }
 }
