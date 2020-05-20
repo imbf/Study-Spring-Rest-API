@@ -1,7 +1,6 @@
 package com.greenfrog.restapi.common;
 
 import com.greenfrog.restapi.index.IndexController;
-import org.h2.index.Index;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.validation.Errors;
