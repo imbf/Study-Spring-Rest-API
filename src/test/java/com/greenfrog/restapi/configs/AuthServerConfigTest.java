@@ -32,7 +32,7 @@ public class AuthServerConfigTest extends BaseControllerTest {
                 .password(password)
                 .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                 .build();
-//        this.accountService.saveAccount(keesun);
+        this.accountService.saveAccount(keesun);
 
         String clientId = "myApp";
         String clientSecret = "pass";
