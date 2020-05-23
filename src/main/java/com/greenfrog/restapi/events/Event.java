@@ -1,6 +1,8 @@
 package com.greenfrog.restapi.events;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.greenfrog.restapi.accounts.Account;
+import com.greenfrog.restapi.accounts.AccountSerializer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,6 +32,7 @@ public class Event {
     private EventStatus eventStatus = EventStatus.DRAFT;
 
     @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
     private Account manager;
 
 
